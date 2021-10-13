@@ -10,5 +10,9 @@ namespace SurveyMonkey.Containers
         public long? ColId { get; set; }
         public long? OtherId { get; set; }
         public string Text { get; set; }
+        public bool? IsCorrect { get; set; }
+        public int? Score { get; set; }
+        [JsonIgnore]
+        internal object TagData { get; set; }
     }
 }

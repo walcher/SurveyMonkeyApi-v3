@@ -27,7 +27,11 @@ namespace SurveyMonkey.Containers
         public CollectionMode? CollectionMode { get; set; }
         public string IpAddress { get; set; }
         public long? RecipientId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; } //Described as "email" in SurveyMonkey's docs, but actually returned as "email_address" by the api.
         public List<ResponsePage> Pages { get; set; }
+        public QuizResults QuizResults { get; set; }
 
         public List<ResponseQuestion> Questions
         {
