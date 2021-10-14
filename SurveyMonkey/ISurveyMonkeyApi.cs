@@ -25,6 +25,7 @@ namespace SurveyMonkey
 
         List<Response> GetSurveyResponseDetailsList(long surveyId, GetResponseListSettings settings);
 
+        Survey CreateSurvey(CreateSurveySettings settings);
         List<Response> GetCollectorResponseOverviewList(long collectorId);
 
         List<Response> GetCollectorResponseDetailsList(long collectorId);

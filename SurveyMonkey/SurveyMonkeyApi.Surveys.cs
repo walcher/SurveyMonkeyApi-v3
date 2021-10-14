@@ -149,5 +149,15 @@ namespace SurveyMonkey
             var response = result.ToObject<SendSurveyResponse>();
             return response;
         }
+
+        public Survey CreateSurvey(CreateSurveySettings settings)
+        {
+            string endPoint = "/surveys";
+            var verb = Verb.POST;
+            var requestData = Helpers.RequestSettingsHelper.GetPopulatedProperties(settings);
+            JToken result = MakeApiRequest(endPoint, verb, requestData);
+            var response = result.ToObject<Survey>();
+            return response;
+        }
     }
 }
