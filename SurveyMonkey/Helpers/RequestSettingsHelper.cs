@@ -52,6 +52,11 @@ namespace SurveyMonkey.Helpers
                         }
                         output.Add(PropertyCasingHelper.CamelToSnake(property.Name), nestedOutput);
                     }
+                    else if (underlyingType.Namespace.StartsWith("SurveyMonkey"))
+                    {
+                        RequestData nestedRequestData = GetPopulatedProperties(property.GetValue(obj));
+                        output.Add(PropertyCasingHelper.CamelToSnake(property.Name), nestedRequestData);
+                    }
                     else
                     {
                         output.Add(PropertyCasingHelper.CamelToSnake(property.Name), property.GetValue(obj));
