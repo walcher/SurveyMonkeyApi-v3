@@ -1,22 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Company>Walnut Tree Software</Company>
-    <FileVersion>3.3.234.1</FileVersion>
+    <FileVersion>3.3.234.2</FileVersion>
     <InformationalVersion>1.0.0.0</InformationalVersion>
-    <AssemblyVersion>3.3.234.1</AssemblyVersion>
+    <AssemblyVersion>3.3.234.2</AssemblyVersion>
     <Product>SurveyMonkeyApi</Product>
     <Title>SurveyMonkeyApi</Title>
     <AssemblyName>SurveyMonkeyApi</AssemblyName>
     <Authors>Ben Emmett - Erik - Walcher</Authors>
     <Copyright>Copyright © Ben Emmett  - Erik - Walcher</Copyright>
-    <Description>Library for accessing v3 of the Survey Monkey Api</Description>
+    <Description>Library for accessing v3 of the Survey Monkey Api - https://github.com/walcher/SurveyMonkeyApi-v3</Description>
     <LangVersion>Latest</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SurveyMonkeyApi.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Walcher.SurveyMonkeyApi</PackageId>
-    <Version>3.3.234.1</Version>
+    <Version>3.3.234.3</Version>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TargetFramework>netstandard2.1</TargetFramework>

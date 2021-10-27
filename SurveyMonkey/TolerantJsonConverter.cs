@@ -136,7 +136,8 @@ namespace SurveyMonkey
         {
             if(this.GetType() == typeof(TolerantJsonConverter))
             {
-                throw new ArgumentException(String.Format("Json property {0} doesn't exist on object {1}", propertyName, type));
+                //throw new ArgumentException(String.Format("Json property {0} doesn't exist on object {1}", propertyName, type));
+                Debug.WriteLine(String.Format("Json property {0} doesn't exist on object {1}", propertyName, type));
             }
         }
     }
