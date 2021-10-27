@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
     <Company>Walnut Tree Software</Company>
     <FileVersion>1.0.0.0</FileVersion>
     <InformationalVersion>1.0.0.0</InformationalVersion>
@@ -15,16 +16,13 @@
     <AssemblyOriginatorKeyFile>SurveyMonkeyApi.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
-    <TargetFrameworks>net45;net5.0</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == ''">
+  <TargetFrameworkIdentifier>.NETCOREAPP</TargetFrameworkIdentifier>
+  <TargetFrameworkVersion>3.1</TargetFrameworkVersion>
+</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
   </ItemGroup>
   <ItemGroup>
