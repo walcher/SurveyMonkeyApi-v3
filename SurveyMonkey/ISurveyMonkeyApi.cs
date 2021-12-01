@@ -24,7 +24,7 @@ namespace SurveyMonkey
         List<Response> GetSurveyResponseOverviewList(long surveyId, GetResponseListSettings settings);
 
         List<Response> GetSurveyResponseDetailsList(long surveyId, GetResponseListSettings settings);
-
+        PaginatedResponse<Response> GetSurveyResponseBulkPaginated(long surveyId, GetResponseListSettings settings);
         Survey CreateSurvey(CreateSurveySettings settings);
         List<Response> GetCollectorResponseOverviewList(long collectorId);
 
@@ -33,6 +33,8 @@ namespace SurveyMonkey
         List<Response> GetCollectorResponseOverviewList(long collectorId, GetResponseListSettings settings);
 
         List<Response> GetCollectorResponseDetailsList(long collectorId, GetResponseListSettings settings);
+        
+        
 
         Response GetSurveyResponseOverview(long surveyId, long responseId);
 
@@ -143,6 +145,7 @@ namespace SurveyMonkey
         ContactList DeleteContactList(long contactListId);
 
         int ApiRequestsMade { get; }
+        ApiHeaders ApiHeaders { get; }
 
         void Dispose();
 

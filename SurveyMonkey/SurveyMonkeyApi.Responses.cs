@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using SurveyMonkey.Containers;
+using SurveyMonkey.Helpers;
 using SurveyMonkey.RequestSettings;
 
 namespace SurveyMonkey
@@ -65,6 +66,14 @@ namespace SurveyMonkey
         public List<Response> GetSurveyResponseDetailsList(long surveyId, GetResponseListSettings settings)
         {
             return GetResponseListPager(surveyId, ObjectType.Survey, settings, true);
+        }
+
+        public PaginatedResponse<Response> GetSurveyResponseBulkPaginated(long surveyId, GetResponseListSettings settings)
+        {
+            string endPoint = string.Format("/surveys/{0}/responses/bulk", surveyId);
+            var requestData = RequestSettingsHelper.GetPopulatedProperties(settings);
+            JToken result = MakeApiRequest(endPoint, Verb.GET, requestData);
+            return result.ToObject<PaginatedResponse<Response>>();
         }
 
         public List<Response> GetCollectorResponseOverviewList(long collectorId)

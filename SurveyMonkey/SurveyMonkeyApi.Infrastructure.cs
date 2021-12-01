@@ -21,9 +21,9 @@ namespace SurveyMonkey
         private readonly int _rateLimitDelay = 500;
         private readonly int[] _retrySequence = { 5, 30, 300, 900 };
         private int _requestsMade;
-
+        private readonly ApiHeaders _apiHeaders;
         public int ApiRequestsMade => _requestsMade;
-
+        public ApiHeaders ApiHeaders => _apiHeaders;
         public IWebProxy Proxy
         {
             get { return _webClient.Proxy; }
@@ -111,6 +111,8 @@ namespace SurveyMonkey
             {
                 _retrySequence = retrySequence;
             }
+
+            _apiHeaders = new ApiHeaders();
         }
 
         private JToken MakeApiRequest(string endpoint, Verb verb, RequestData data)
@@ -133,11 +135,33 @@ namespace SurveyMonkey
                 }
             }
             string result = AttemptApiRequestWithRetry(url, verb, data);
+            TryReadHeaders();
 
             _lastRequestTime = DateTime.UtcNow;
-
             var parsed = JObject.Parse(result);
             return parsed;
+        }
+
+        private void TryReadHeaders()
+        {
+            try
+            {
+                _apiHeaders.OAuthScopesAvailable = _webClient.ResponseHeaders.Get("X-OAuth-Scopes-Available");
+                _apiHeaders.OAuthScopesGranted = _webClient.ResponseHeaders.Get("X-OAuth-Scopes-Granted");
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Day-Limit"), out int RatelimitAppGlobalDayLimit);
+                _apiHeaders.RatelimitAppGlobalDayLimit = RatelimitAppGlobalDayLimit;
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Day-Remaining"), out int RatelimitAppGlobalDayRemaining);
+                _apiHeaders.RatelimitAppGlobalDayRemaining = RatelimitAppGlobalDayRemaining;
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Day-Reset"), out int RatelimitAppGlobalDayReset);
+                _apiHeaders.RatelimitAppGlobalDayReset = RatelimitAppGlobalDayReset;
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Minute-Limit"), out int RatelimitAppGlobalMinuteLimit);
+                _apiHeaders.RatelimitAppGlobalMinuteLimit = RatelimitAppGlobalMinuteLimit;
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Minute-Remaining"), out int RatelimitAppGlobalMinuteRemaining);
+                _apiHeaders.RatelimitAppGlobalMinuteRemaining = RatelimitAppGlobalMinuteRemaining;
+                int.TryParse(_webClient.ResponseHeaders.Get("X-Ratelimit-App-Global-Minute-Reset"), out int RatelimitAppGlobalMinuteReset);
+                _apiHeaders.RatelimitAppGlobalMinuteReset = RatelimitAppGlobalMinuteReset;
+            }
+            catch { }
         }
 
         private string AttemptApiRequestWithRetry(string url, Verb verb, RequestData data)
